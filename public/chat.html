@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Node js socket.io chat app </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html{
+        font-size: 62.5%;
+    }
+    body{
+        background-color: #e6e6e6;
+        font-family: 'helvetica', 'sans-serif', 'Arial';
+    }
+    .main-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .child1{
+        width: 24.5%;
+        background-color: #2F4F4F;
+        height: 100vh;
+        overflow: auto;
+    }
+    .child2{
+        width: 74.5%;
+        /*background-color: rgb(207, 207, 212);*/
+        height: 100vh;
+        position: relative;
+        overflow: auto;
+        background-color: white;
+    }
+    
+    @media(max-width: 760px){
+        .child1{
+            display: none;
+        }
+        .child2{
+            width: 100%;
+        }
+    }
+</style>
+</head>
+<body>
+ 
+ <!-- Main div -->   
+<div class="main-container">
+    <!-- Div 1 -->
+    <div id="active_user_records" class="child1">
+        
+    </div>
+    
+    <!-- Div2 -->
+    <div class="child2" style="display: flex; flex-flow: column; max-height: 100vh;">
+        <div id="message-container" style="flex-grow: 1; overflow-y: scroll;"> </div>
+        
+        <div class="form-container" style="display: flex;">
+            <form id="form1" style="display: flex; width: 100%; justify-content: space-around;">
+                <input type="text" name="text1" placeholder="message" style="width: 100%; margin: 1%;"/>
+                <button type="submit" style="margin: 1%;padding: 0.5% 2%; color: white;  background-color: #9400D3; border: none;"> Send </button>
+            </form> 
+            <button id="location"  style="margin: 1%; padding: 0.5% 2%; color: white; background-color: #9400D3; border: none;"> send Location </button>
+        </div>
+    </div>
+    <!--<div class="child2">
+        <div id="message-container" style="width: 100%; padding: 0 1%;"> </div>
+        
+        <div class="form-container" style="padding: 1%;position: sticky; bottom: 0; display: flex; justify-content: space-between; width: 100%;background-color: white; z-index: 99999;">
+            <form id="form1" style="display: flex; width: 100%; justify-content: space-around;">
+                <input type="text" name="text1" style="width: 100%; margin: 1%;"/>
+                <button type="submit" style="margin: 1%;padding: 0.5% 2%; color: white;  background-color: #9400D3; border: none;"> Send </button>
+            </form>
+            <button id="location"  style="margin: 1%; padding: 0.5% 2%; color: white; background-color: #9400D3; border: none;"> send Location </button>
+        </div>
+    </div>-->
+</div>   
+    
+    
+    
+    <script id="message-template" type="text/html">
+        <div>
+            <p style="padding: 0.7%;"> <span style="font-weight: 600;color: grey; font-size: 1.6rem;"> {{username}} </span> - <span style="color: lightgrey; font-size: 1.2rem; "> {{createdAt}} </span> <br /> <span style="font-size: 1.7rem;">{{messagetext}} </span> </p>
+        </div>
+    </script>
+    
+    <!-- making template for sharing the location -->
+    <script id="share_location" type="text/html">
+        <div>
+            <p style="padding: 0.7%;"> <span style="font-weight: 600;color: grey; font-size: 1.6rem;"> {{username}} </span> - <span style="color: lightgrey; font-size: 1.2rem; "> {{createdAt}} </span> <br /> <span style="font-size: 1.7rem;"><a href="{{location_link}}" target="_blank"> my current Location </a> </span> </p>
+        
+            
+        </div>
+    </script>
+    
+    <!-- Mustache Libraries for dynamic render in webpages  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"> </script>
+</body>
+</html>
