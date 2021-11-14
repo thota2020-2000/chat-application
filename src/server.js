@@ -30,10 +30,10 @@ io.on('connection', (socket) => {
 
         socket.join(room);
 
-        socket.emit('message', getCurrentTimeWithMessage('welcome', 'chat admin - mrityunjay'));
+        socket.emit('message', getCurrentTimeWithMessage('welcome', 'chat admin - swathi'));
 
         // gets eveyone except sender
-        socket.broadcast.to(room).emit("message", getCurrentTimeWithMessage(`${user.username} is joined the room!`, 'chat admin - mrityunjay'));
+        socket.broadcast.to(room).emit("message", getCurrentTimeWithMessage(`${user.username} is joined the room!`, 'chat admin - swathi'));
 
 
         io.to(room).emit("all_participants", getUsersInRoom(room), user.room);
